@@ -19,3 +19,5 @@ yarn-error.log*
 # IDE and editor settings
 .vscode/
 .idea/
+
+.gitignore
