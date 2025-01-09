@@ -8,10 +8,9 @@ const app = express();
 app.use(express.json());
 app.post("/api/gemini-service", async (req, res) => {
   try {
-    const { prompt } = req.body; // Extract prompt from the request body
+    const { prompt } = req.body;
 
     console.log(req.body);
-    
 
     if (!prompt) {
       return res
@@ -22,12 +21,14 @@ app.post("/api/gemini-service", async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const result = await model.generateContent(prompt); // Generate content using the prompt
+    const result = await model.generateContent(prompt);
 
-    console.log('result', result.response.candidates[0].content.parts[0].text);
-    
+    console.log("result", result.response.candidates[0].content.parts[0].text);
 
-    res.json({ success: true, message: result.response.candidates[0].content.parts[0].text });
+    res.json({
+      success: true,
+      message: result.response.candidates[0].content.parts[0].text,
+    });
   } catch (error) {
     console.error("Error generating content:", error);
     res
@@ -36,7 +37,6 @@ app.post("/api/gemini-service", async (req, res) => {
   }
 });
 
-// Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
