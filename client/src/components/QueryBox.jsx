@@ -2,9 +2,7 @@ import { useState } from "react";
 
 const QueryBox = ({ addMessage, setLoading }) => {
   const [query, setQuery] = useState("");
-
   const [error, setError] = useState("");
-  const [messages, setMessages] = useState([]);
 
   const handleSend = async () => {
     if (!query) return;
